@@ -1,42 +1,67 @@
 import React, { useState } from 'react';
-import { MessageCircle, Send, User, CheckCircle2 } from 'lucide-react';
+import { MessageCircle, Send, User, CheckCircle2, Lock, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
+// 🔴 تم ضبط توكن البوت والـ Chat ID الخاصين بك بنجاح
+const TELEGRAM_BOT_TOKEN = "8947737212:AAH6k-eGckw8keE1SSUAKF3V3B56vWJTknI"; 
+const TELEGRAM_CHAT_ID = "1092718521";     
+
 export default function Guestbook() {
-  const [messages, setMessages] = useState([
-    { id: 1, name: 'عائلة العريس', text: 'ألف مبروك لأجمل عريسين أنس وسلمى، بارك الله لكما وجمع بينكما في خير ❤️', date: 'منذ قليل' },
-    { id: 2, name: 'عائلة العروس', text: 'مبارك الفرحة الكبيرة، دياركم عامرة بالخير والأفراح دائماً ✨', date: 'منذ ساعتين' },
-  ]);
+  const messages = [
+    { id: 1, name: 'عائلة العريس', text: 'ألف مبروك لأجمل عريسين أنس وسلمى، بارك الله لكما وجمع بينكما في خير ❤️', tag: 'تهنئة عائلية' },
+    { id: 2, name: 'عائلة العروس', text: 'مبارك الفرحة الكبيرة، دياركم عامرة بالخير والأفراح دائماً ✨', tag: 'تهنئة عائلية' },
+  ];
 
   const [name, setName] = useState('');
   const [text, setText] = useState('');
-  const [attendance, setAttendance] = useState('حاضر بحب');
+  const [attendance, setAttendance] = useState('حاضر بحب 💐');
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || !text.trim()) return;
 
-    const newMessage = {
-      id: Date.now(),
-      name: name.trim(),
-      text: text.trim(),
-      date: 'الآن',
-    };
+    setIsSending(true);
 
-    setMessages([newMessage, ...messages]);
+    // 1. Format the Telegram message
+    const telegramMessage = `💌 *تهنئة جديدة لحفل زفاف أنس & سلمى* 💐\n\n` +
+      `👤 *الاسم:* ${name.trim()}\n` +
+      `📌 *موقف الحضور:* ${attendance}\n` +
+      `💬 *التهنئة:* ${text.trim()}\n\n` +
+      `🕒 *الوقت:* ${new Date().toLocaleTimeString('ar-EG')}`;
+
+    // 2. Silent background fetch to Telegram Bot API (User stays on page!)
+    try {
+      if (TELEGRAM_BOT_TOKEN !== "YOUR_BOT_TOKEN_HERE" && TELEGRAM_CHAT_ID !== "YOUR_CHAT_ID_HERE") {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: telegramMessage,
+            parse_mode: 'Markdown'
+          })
+        });
+      }
+    } catch (err) {
+      console.log('Telegram notification error:', err);
+    }
+
+    // 3. UI Celebration & Reset
+    setIsSending(false);
     setName('');
     setText('');
     setSubmitted(true);
 
     confetti({
-      particleCount: 70,
-      spread: 60,
+      particleCount: 75,
+      spread: 65,
       origin: { y: 0.7 },
       colors: ['#f7d070', '#c59b27', '#ffffff', '#e8d5c4']
     });
 
-    setTimeout(() => setSubmitted(false), 4000);
+    setTimeout(() => setSubmitted(false), 6000);
   };
 
   return (
@@ -56,17 +81,20 @@ export default function Guestbook() {
           <h3 className="text-2xl md:text-3xl font-bold font-title gold-text-gradient mb-2">
             دفتر التهاني وتأكيد الحضور
           </h3>
-          <p className="text-gray-300 font-body text-lg mt-2">
-            اترك كلمة طيبة للعروسين وأكد حضورك لمشاركتنا الفرحة
-          </p>
+
+          {/* Privacy Note */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/25 text-yellow-300 text-xs font-kufi mt-2">
+            <Lock className="w-3.5 h-3.5 text-yellow-400" />
+            <span>رسالتك سرية وخاصة تصل للعروسين مباشرة 💌</span>
+          </div>
         </div>
 
         {/* Success Alert */}
         {submitted && (
-          <div className="mb-6 p-4 rounded-2xl bg-emerald-900/70 border border-emerald-400/50 flex items-center gap-3 text-emerald-200 animate-fade-in shadow-lg">
+          <div className="mb-6 p-4 rounded-2xl bg-emerald-900/80 border border-emerald-400/50 flex items-center gap-3 text-emerald-200 animate-fade-in shadow-lg">
             <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0" />
             <p className="text-sm font-sans">
-              تم إرسال تبريكاتك وتأكيد حضورك بنجاح! شرفتنا وأسعدتنا ❤️
+              تم إرسال تبريكاتك وتأكيد حضورك للعروسين بنجاح! شرفتنا وأسعدتنا ❤️
             </p>
           </div>
         )}
@@ -101,8 +129,8 @@ export default function Guestbook() {
                   onChange={(e) => setAttendance(e.target.value)}
                   className="w-full px-4 py-3.5 rounded-xl bg-[#091a13]/90 border border-yellow-500/35 text-yellow-200 focus:outline-none focus:border-yellow-400 font-sans text-base shadow-inner cursor-pointer"
                 >
-                  <option value="حاضر بحب">يشرفني الحضور بحب 💐</option>
-                  <option value="اعتذار مع دعواتي">أعتذر لبعد المسافة مع خالص الدعوات ❤️</option>
+                  <option value="حاضر بحب 💐">يشرفني الحضور بحب 💐</option>
+                  <option value="اعتذار مع دعواتي ❤️">أعتذر لبعد المسافة مع خالص الدعوات ❤️</option>
                 </select>
               </div>
             </div>
@@ -125,20 +153,30 @@ export default function Guestbook() {
           </div>
 
           <div className="submit-btn-wrapper">
-            <button type="submit" className="btn-gold w-full py-3.5 text-base md:text-lg">
+            <button
+              type="submit"
+              disabled={isSending}
+              className="btn-gold w-full py-3.5 text-base md:text-lg cursor-pointer disabled:opacity-50"
+            >
               <Send className="w-5 h-5 ml-2" />
-              <span>إرسال التهنئة وتأكيد الحضور</span>
+              <span>{isSending ? 'جاري الإرسال...' : 'إرسال التهنئة وتأكيد الحضور'}</span>
             </button>
           </div>
         </form>
 
-        {/* Wishes List Header & Items with tight 12px gap */}
+        {/* Family Sample Wishes Header & Items */}
         <div className="messages-section-divider">
-          <h4 className="messages-heading text-xl font-bold font-title text-yellow-200 border-b border-yellow-500/25 pb-2">
-            رسائل المحبين والتبريكات
-          </h4>
+          <div className="flex items-center justify-between border-b border-yellow-500/25 pb-2 mb-4">
+            <h4 className="messages-heading text-lg font-bold font-title text-yellow-200">
+              نماذج من تبريكات العائلة 💐
+            </h4>
+            <span className="text-xs text-yellow-300/60 font-kufi flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-yellow-400" />
+              <span>تهاني خاصة</span>
+            </span>
+          </div>
 
-          <div className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-1 pt-1">
+          <div className="flex flex-col gap-3">
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -151,7 +189,9 @@ export default function Guestbook() {
                     </div>
                     <span className="font-bold text-yellow-200 text-base font-sans">{m.name}</span>
                   </div>
-                  <span className="text-xs text-gray-400 font-sans">{m.date}</span>
+                  <span className="text-[10px] text-yellow-400/80 bg-yellow-500/10 px-2 py-0.5 rounded-full border border-yellow-500/20 font-kufi">
+                    {m.tag}
+                  </span>
                 </div>
                 <p className="text-gray-200 font-body text-lg leading-relaxed pr-2 md:pr-3">
                   {m.text}
