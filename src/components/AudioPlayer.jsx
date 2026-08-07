@@ -6,8 +6,8 @@ export default function AudioPlayer({ autoPlayTrigger }) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
 
-  // User provided song track: Where_Our_Paths_Align.mp4 served from /public
-  const songTrack = "/Where_Our_Paths_Align.mp4";
+  // User provided song track: Where_Our_Paths_Align.mp3 served from /public
+  const songTrack = "/Where_Our_Paths_Align.mp3";
 
   useEffect(() => {
     if (autoPlayTrigger && audioRef.current) {
