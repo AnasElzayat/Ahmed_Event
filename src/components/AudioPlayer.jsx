@@ -6,8 +6,8 @@ export default function AudioPlayer({ autoPlayTrigger }) {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
 
-  // User provided song track: Where_Our_Paths_Align.mp3 served from /public
-  const songTrack = "/Where_Our_Paths_Align.mp3";
+  // New song track for أحمد & مهاد
+  const songTrack = "/WhatsApp Video 2026-11-04 at 1.09.42 AM.mp4";
 
   useEffect(() => {
     if (autoPlayTrigger && audioRef.current) {
@@ -50,21 +50,21 @@ export default function AudioPlayer({ autoPlayTrigger }) {
       />
 
       {/* Floating Audio Control Badge */}
-      <div className="glass-card px-4 py-2.5 rounded-full flex items-center gap-3 border border-yellow-500/40 shadow-xl backdrop-blur-md">
+      <div className="glass-card px-4 py-2.5 rounded-full flex items-center gap-3 border border-amber-400/40 shadow-xl backdrop-blur-md">
         <button
           onClick={togglePlay}
-          className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 text-emerald-950 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
+          className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 text-white hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
           title={isPlaying ? "إيقاف الموسيقى" : "تشغيل الموسيقى"}
         >
           <Disc className={`w-5 h-5 ${isPlaying ? 'animate-spin-slow' : ''}`} />
         </button>
 
         <div className="flex flex-col">
-          <span className="text-xs font-bold text-yellow-300 font-kufi flex items-center gap-1">
-            <Music className="w-3 h-3 text-yellow-400" />
-            <span>Where Our Paths Align 🎵</span>
+          <span className="text-xs font-bold text-amber-700 font-kufi flex items-center gap-1">
+            <Music className="w-3 h-3 text-amber-500" />
+            <span>أغنية الحفل 🎵</span>
           </span>
-          <span className="text-[10px] text-gray-300">
+          <span className="text-[10px] text-amber-600/70">
             {isPlaying ? 'قيد التشغيل 🎶' : 'متوقفة ⏸️'}
           </span>
         </div>
@@ -72,7 +72,7 @@ export default function AudioPlayer({ autoPlayTrigger }) {
         {/* Mute Toggle */}
         <button
           onClick={toggleMute}
-          className="p-1.5 text-yellow-400/80 hover:text-yellow-300 transition-colors cursor-pointer"
+          className="p-1.5 text-amber-500/80 hover:text-amber-600 transition-colors cursor-pointer"
           title={isMuted ? "إلغاء كتم الصوت" : "كتم الصوت"}
         >
           {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}

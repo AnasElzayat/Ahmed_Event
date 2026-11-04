@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --bg-dark: #071510;
-  --bg-card: rgba(15, 38, 30, 0.75);
-  --bg-card-hover: rgba(22, 53, 42, 0.85);
+  --bg-light: #faf8f4;
+  --bg-card: rgba(255, 255, 255, 0.82);
+  --bg-card-hover: rgba(255, 255, 255, 0.92);
   
-  --gold-primary: #d4af37;
-  --gold-light: #fef08a;
-  --gold-gradient: linear-gradient(135deg, #ffe082 0%, #d4af37 45%, #996515 85%, #fef08a 100%);
-  --gold-gradient-soft: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(153, 101, 21, 0.15) 100%);
-  --gold-border: rgba(212, 175, 55, 0.35);
+  --gold-primary: #c9a84c;
+  --gold-dark: #8a6d2b;
+  --gold-light: #f3e5b0;
+  --gold-gradient: linear-gradient(135deg, #f5e6a3 0%, #c9a84c 45%, #8a6d2b 85%, #f3e5b0 100%);
+  --gold-gradient-soft: linear-gradient(135deg, rgba(201, 168, 76, 0.18) 0%, rgba(138, 109, 43, 0.08) 100%);
+  --gold-border: rgba(201, 168, 76, 0.3);
   
-  --text-main: #fdfbf7;
-  --text-muted: #d1d5db;
-  --text-gold: #f3d484;
+  --text-main: #3a3226;
+  --text-muted: #7a7167;
+  --text-gold: #9a7e3a;
 
   --font-arabic-title: 'Aref Ruqaa', 'Amiri', serif;
   --font-arabic-body: 'Amiri', serif;
@@ -30,7 +31,7 @@
 html, body {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-light);
   color: var(--text-main);
   font-family: var(--font-arabic-sans);
   overflow-x: hidden;
@@ -38,7 +39,7 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* Background Radial Glows */
+/* Soft Radial Glows */
 body::before {
   content: '';
   position: fixed;
@@ -47,7 +48,7 @@ body::before {
   width: 60vw;
   height: 60vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.1) 0%, rgba(255,255,255,0) 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -60,7 +61,7 @@ body::after {
   width: 60vw;
   height: 60vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(46, 125, 96, 0.22) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(243, 229, 176, 0.2) 0%, rgba(255,255,255,0) 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -70,7 +71,7 @@ body::after {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050d0a;
+  background: #f0ece4;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--gold-primary);
@@ -88,8 +89,9 @@ section {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--gold-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.47),
-              inset 0 0 15px rgba(212, 175, 55, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(201, 168, 76, 0.08),
+              0 2px 12px 0 rgba(0, 0, 0, 0.04),
+              inset 0 0 15px rgba(255, 255, 255, 0.5);
   border-radius: 28px;
   position: relative;
   overflow: hidden;
@@ -108,46 +110,10 @@ section {
 }
 
 .glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.6);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6),
-              inset 0 0 25px rgba(212, 175, 55, 0.1);
-}
-
-/* Guestbook Spacing Rules */
-.form-field-group {
-  margin-bottom: 0.9rem !important;
-}
-
-.field-label {
-  display: block !important;
-  margin-bottom: 0.4rem !important;
-  line-height: 1.4 !important;
-}
-
-.guestbook-input-box {
-  margin-bottom: 0.35rem !important;
-}
-
-.submit-btn-wrapper {
-  margin-top: 1rem !important;
-  margin-bottom: 1.25rem !important;
-}
-
-.messages-section-divider {
-  margin-top: 1.5rem !important;
-  margin-bottom: 1rem !important;
-  padding-top: 1rem !important;
-  border-top: 1px solid rgba(212, 175, 55, 0.25) !important;
-}
-
-.messages-heading {
-  margin-bottom: 0.9rem !important;
-  display: block !important;
-}
-
-.message-card-item {
-  margin-bottom: 0 !important;
-  padding: 1rem 1.25rem !important;
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 12px 40px 0 rgba(201, 168, 76, 0.14),
+              0 4px 16px 0 rgba(0, 0, 0, 0.06),
+              inset 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 /* Typography Utilities */
@@ -179,7 +145,7 @@ section {
   border-color: var(--gold-primary);
   border-style: solid;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .ornate-corner-tl {
@@ -210,7 +176,7 @@ section {
 /* Luxury Button Styles */
 .btn-gold {
   background: var(--gold-gradient);
-  color: #0d2319;
+  color: #fff;
   font-weight: 700;
   padding: 14px 28px;
   border-radius: 50px;
@@ -221,15 +187,15 @@ section {
   justify-content: center;
   gap: 10px;
   font-size: 1.05rem;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
+  box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .btn-gold:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.55);
-  filter: brightness(1.08);
+  box-shadow: 0 10px 28px rgba(201, 168, 76, 0.45);
+  filter: brightness(1.06);
 }
 
 .btn-gold:active {
@@ -238,7 +204,7 @@ section {
 
 .btn-outline-gold {
   background: transparent;
-  color: var(--gold-light);
+  color: var(--gold-dark);
   border: 1.5px solid var(--gold-primary);
   font-weight: 600;
   padding: 12px 24px;
@@ -253,9 +219,9 @@ section {
 }
 
 .btn-outline-gold:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: var(--gold-light);
-  color: #fff;
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--gold-dark);
+  color: var(--gold-dark);
   transform: translateY(-2px);
 }
 
@@ -275,8 +241,8 @@ section {
 }
 
 @keyframes pulseGold {
-  0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-  50% { shadow: 0 0 35px rgba(212, 175, 55, 0.7); }
+  0%, 100% { box-shadow: 0 0 15px rgba(201, 168, 76, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(201, 168, 76, 0.5); }
 }
 
 .animate-pulse-gold {
@@ -292,14 +258,14 @@ section {
   animation: spinSlow 18s linear infinite;
 }
 
-/* Photo Frame Lace Styling */
+/* Photo Frame Styling - Elegant White & Gold */
 .photo-frame-wrapper {
   position: relative;
   display: inline-block;
   padding: 14px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(243,212,132,0.9));
+  background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(243,229,176,0.6));
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(212,175,55,0.35);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 0 30px rgba(201,168,76,0.15);
 }
 
 .photo-frame-inner {

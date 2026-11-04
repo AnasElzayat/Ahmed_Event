@@ -18,13 +18,23 @@ export default function PetalsCanvas() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Generate Petals & Gold Sparkles
+    // Generate Petals & Gold Sparkles - Soft white/gold palette
     const numPetals = 25;
     const numSparkles = 35;
     const petals = [];
     const sparkles = [];
 
     for (let i = 0; i < numPetals; i++) {
+      const colorRandom = Math.random();
+      let color;
+      if (colorRandom > 0.6) {
+        color = 'rgba(201, 168, 76, 0.3)'; // soft gold
+      } else if (colorRandom > 0.3) {
+        color = 'rgba(243, 229, 176, 0.4)'; // light gold
+      } else {
+        color = 'rgba(255, 228, 196, 0.35)'; // peach/blush
+      }
+
       petals.push({
         x: Math.random() * width,
         y: Math.random() * height - height,
@@ -33,7 +43,7 @@ export default function PetalsCanvas() {
         speedX: Math.random() * 0.8 - 0.4,
         rotation: Math.random() * 360,
         spin: Math.random() * 2 - 1,
-        color: Math.random() > 0.4 ? 'rgba(235, 140, 160, 0.65)' : 'rgba(212, 175, 55, 0.45)',
+        color: color,
       });
     }
 
@@ -50,15 +60,15 @@ export default function PetalsCanvas() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Render Sparkles
+      // Render Sparkles - warm gold tones
       sparkles.forEach((s) => {
         s.alpha += s.speedAlpha;
         if (s.alpha >= 1 || s.alpha <= 0.1) s.speedAlpha = -s.speedAlpha;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(254, 240, 138, ${Math.max(0, s.alpha)})`;
+        ctx.fillStyle = `rgba(201, 168, 76, ${Math.max(0, s.alpha * 0.5)})`;
         ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(212, 175, 55, 0.8)';
+        ctx.shadowColor = 'rgba(201, 168, 76, 0.5)';
         ctx.fill();
         ctx.shadowBlur = 0;
       });
@@ -84,7 +94,7 @@ export default function PetalsCanvas() {
         ctx.bezierCurveTo(p.size, p.size / 3, p.size / 2, -p.size / 2, 0, 0);
         ctx.fillStyle = p.color;
         ctx.shadowBlur = 5;
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+        ctx.shadowColor = 'rgba(201, 168, 76, 0.15)';
         ctx.fill();
         ctx.restore();
       });
