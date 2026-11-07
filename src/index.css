@@ -289,3 +289,64 @@ section {
 .photo-frame-wrapper:hover .photo-frame-inner video {
   transform: scale(1.03);
 }
+
+/* ── Couple Name Styling ── */
+.couple-name {
+  font-family: 'Lalezar', 'Cairo', sans-serif;
+  font-weight: 400;
+  font-size: 4.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-shadow: 0 3px 15px rgba(201, 168, 76, 0.25);
+}
+
+@media (min-width: 768px) {
+  .couple-name {
+    font-size: 7rem;
+  }
+}
+
+.couple-name-sm {
+  font-family: 'Lalezar', 'Cairo', sans-serif;
+  font-weight: 400;
+  font-size: 2.5rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+/* ── Heart Icon ── */
+.heart-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d4a853, #c9a84c, #b8942e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(201, 168, 76, 0.45), 0 0 60px rgba(201, 168, 76, 0.15);
+  animation: heartPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.heart-icon-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 168, 76, 0.3);
+  animation: heartRing 2s ease-in-out infinite;
+}
+
+.heart-svg {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(201, 168, 76, 0.45), 0 0 60px rgba(201, 168, 76, 0.15); }
+  50% { transform: scale(1.08); box-shadow: 0 0 40px rgba(201, 168, 76, 0.6), 0 0 80px rgba(201, 168, 76, 0.25); }
+}
+
+@keyframes heartRing {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
