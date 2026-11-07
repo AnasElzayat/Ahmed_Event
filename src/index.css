@@ -292,7 +292,7 @@ section {
 
 /* ── Couple Name Styling ── */
 .couple-name {
-  font-family: 'Rakkas', 'Cairo', sans-serif;
+  font-family: 'Lalezar', 'Cairo', sans-serif;
   font-weight: 400;
   font-size: 4.5rem;
   letter-spacing: 0.02em;
@@ -307,7 +307,7 @@ section {
 }
 
 .couple-name-sm {
-  font-family: 'Rakkas', 'Cairo', sans-serif;
+  font-family: 'Lalezar', 'Cairo', sans-serif;
   font-weight: 400;
   font-size: 2.5rem;
   letter-spacing: 0.02em;
