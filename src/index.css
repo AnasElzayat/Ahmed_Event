@@ -292,8 +292,8 @@ section {
 
 /* ── Couple Name Styling ── */
 .couple-name {
-  font-family: 'Lalezar', 'Cairo', sans-serif;
-  font-weight: 400;
+  font-family: 'Aref Ruqaa', 'Amiri', serif;
+  font-weight: 700;
   font-size: 4.5rem;
   letter-spacing: 0.02em;
   line-height: 1.2;
@@ -307,8 +307,8 @@ section {
 }
 
 .couple-name-sm {
-  font-family: 'Lalezar', 'Cairo', sans-serif;
-  font-weight: 400;
+  font-family: 'Aref Ruqaa', 'Amiri', serif;
+  font-weight: 700;
   font-size: 2.5rem;
   letter-spacing: 0.02em;
   line-height: 1.3;
